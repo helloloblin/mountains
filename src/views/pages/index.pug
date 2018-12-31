@@ -5,16 +5,26 @@ block content
   section.welcome
     .welcome__button
       button.button Авторизоваться
-    .welcome__content
-      +image('content/layer.jpg', 'page title', 'title-img')
-      .welcome__user-desc
-        .user
-          .user__pic-container
-            .user__pic
-             +image('content/user.jpg', 'user pic', 'user__pic-img')
-        .user__info
-          .user__name Павел Трофимов
-          .user__desc Личный сайт веб разработчика
+    .flip-container
+        .welcome__bg__flip
+            
+          .front
+          +card-avatar('', 'Трофимов Павел', 'Сайт веб-разрабочтика')
+          .welcome__socials
+            ul.socials
+              each social in ['vk', 'github', 'in']
+                li.social__item
+                  a(href="").socials__link
+                    +icon(social, 'social__icon')
+          .welcome__nav
+            +nav('nav', ['Мои работы', 'Обо мне', 'Блок'])
+          .back
+          test_2
+
+
+     
+
+          
 
 
           

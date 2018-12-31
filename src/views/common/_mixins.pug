@@ -1,6 +1,67 @@
 mixin icon(iconName, iconClass)
-  svg(class=`${iconClass}`)
-    use(xlink:href=`/assets/images/icons/sprite.svg#${iconName}`)
+	svg(class=`${iconClass}`)
+		use(xlink:href=`/assets/images/icons/sprite.svg#${iconName}`)
 
 mixin image(imagePath, imageAlt, imageClass)
-  img(src=`/assets/images/${imagePath}`, alt=`${imageAlt}`, class=`${imageClass}`)
+	img(src=`/assets/images/${imagePath}`, alt=`${imageAlt}`, class=`${imageClass}`)
+
+mixin card-avatar(subClass, title, subtitle, nosvg)
+	.card-avatar
+		if(!nosvg)
+			.card-avatar__stars
+				svg.card-avatar__svg
+					use(xlink:href="assets/images/content/layer.jpg")
+		.card-avatar__photo
+			img(src="assets/images/content/user.jpg", alt="MyFace").img-responsive
+		.card-avatar__titles
+			h1(class="card-avatar__title " + subClass)= title
+			p.card-avatar__subtitle= subtitle
+
+mixin icon(iconName, iconClass)
+	svg(class=`${iconClass}`)
+		use(xlink:href=`/assets/images/icons/sprite.svg#${iconName}`)
+
+mixin image(imagePath, imageAlt, imageClass)
+	img(src=`/assets/images/${imagePath}`, alt=`${imageAlt}`, class=`${imageClass}`)
+
+mixin socials(className)
+	-var socials= ['vk', 'github', 'skype']
+	ul(class="socials " + className)
+		each social in socials
+			li.socials__item
+				a(href="#").socials__link
+					i(aria-hidden="true" class="fa fa-"+social)
+
+mixin hamburger
+	a(href="#")#hamburger.hamburger
+		span.hamburger__span
+		span.hamburger__span.deleted
+		span.hamburger__span
+
+mixin triangles(className)
+	div(class=`triangles ${className}`)
+		svg(xmlns="http://www.w3.org/2000/svg" viewbox=`0 0 1000 85` preserveaspectratio="none" class="triangles__svg")
+			polygon(class = "triangles__left" points=`0,0   0,86   500.8,86   500.8,84`)
+			polygon(class = "triangles__right" points=`1000,0   1000,86   500,86   500,84`)
+		block trianglesBottom
+
+mixin nav(className, id='empty')
+	-
+		var items = [
+			{ url:'./works.html', title:'Мои работы' },
+			{ url:'./about.html', title:'Обо мне' }, 
+			{ url:'./blog.html', title:'Блог' }, 
+			]
+	nav(class="nav " + className, id=id)
+		ul(class="nav__list")
+			each item in items
+				li(class="nav__item")
+					a(href=item.url class="nav__link")= item.title
+
+mixin parallax-block(className)
+	div(class=`${className} parallax-block`)
+		.parallax-block__layer
+			picture
+				source( type="image/webp" srcset="assets/images/no_bg_webp.webp").img-responsive.parallax-block__img
+				source(media="(max-width: 992px )", srcset="assets/images/no_bg_tablet.png").img-responsive.parallax-block__img
+				img(src="assets/images/no_bg.png", alt="").img-responsive.parallax-block__img
